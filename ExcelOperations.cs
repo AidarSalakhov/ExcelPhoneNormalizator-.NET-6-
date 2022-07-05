@@ -64,7 +64,7 @@ namespace ExcelPhoneNormalizator
         {
             try
             {
-                return ((Excel.Worksheet)_excel.ActiveSheet).Cells[row, column];
+                return ((Excel.Worksheet)_excel.ActiveSheet).Cells[row, column].Value2;
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             return null;
@@ -148,8 +148,7 @@ namespace ExcelPhoneNormalizator
 
         public void SetColumnWidth(int column, int width)
         {
-            Excel.Range range = _excel.get_Range(column, Type.Missing);
-            range.Columns.ColumnWidth = width;
+            _excel.ActiveSheet.Columns[column].ColumnWidth = width;
         }
 
         private bool IsTooManyRepeatingNumbers(string value)
